@@ -15,3 +15,4 @@ washington.csv
 
 ### Credits
 Udacity Programing for Data Science Nanodegree Program
+I'd also like to thank my wife and kids for supporting me through this effort! :-)
