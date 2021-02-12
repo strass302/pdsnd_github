@@ -1,4 +1,5 @@
 ## VERSION NOTES: Python=3.6.3, pandas=0.19.2
+#This program provides an interactive way to explore bikeshare data! :D
 
 import time
 import pandas as pd
