@@ -51,10 +51,8 @@ def get_filters():
             break
         except:
             print('\n\nINVALID INPUT, please try again.')
-
     print('-'*40)
     return city, month, day
-
 
 def load_data(city, month, day):
     """
@@ -68,7 +66,6 @@ def load_data(city, month, day):
         df - Pandas DataFrame containing city data filtered by month and day
     """
     df = pd.read_csv(CITY_DATA[city])
-
     # convert timestamps to datetime
     df['Start Time'] = pd.to_datetime(df['Start Time'])
     df['End Time'] = pd.to_datetime(df['End Time'])
@@ -80,21 +77,17 @@ def load_data(city, month, day):
     df['day_of_week'] = df['Start Time'].dt.weekday_name
     # create trips column
     df['trip'] = df['Start Station'] + ' to ' + df['End Station']
-
     # filter by month if applicable
     month_filter = False
     if month != 'All':
         df = df[df['month'] == int(month)]
         month_filter = True
-
     # filter by day of week if applicable
     day_filter = False
     if day != 'All':
         df = df[df['day_of_week'] == DAY_OF_WEEK[day]]
         day_filter = True
-
     return df , month_filter, day_filter
-
 
 def time_stats(df, month_filter, day_filter):
     """Displays statistics on the most frequent times of travel."""
