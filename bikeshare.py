@@ -135,14 +135,12 @@ def station_stats(df):
     # display most frequent combination of start station and end station trip
     popular_trip = df['trip'].mode()[0]
     print('The most frequent start/stop station combination was from {}'.format(popular_trip))
-
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
 
 def trip_duration_stats(df):
     """Displays statistics on the total and average trip duration."""
-
     print('\nCalculating Trip Duration...\n')
     start_time = time.time()
 
@@ -150,14 +148,12 @@ def trip_duration_stats(df):
     travel_time = df['Travel Time'].sum().total_seconds() / (60*60*24)
     mean_travel_time = df['Travel Time'].mean().total_seconds() / (60)
     print('The total travel time was {} days, and the average travel time was {} minutes.'.format(travel_time, mean_travel_time))
-
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
 
 def user_stats(df):
     """Displays statistics on bikeshare users."""
-
     print('\nCalculating User Stats...\n')
     start_time = time.time()
 
@@ -198,8 +194,8 @@ def main():
         trip_duration_stats(df)
         user_stats(df)
         view_data(df)
-        restart = input('\nWould you like to restart? Enter yes or no.\n')
-        if restart.lower() != 'yes':
+        restart = input('\nWould you like to restart? Enter Y or N.\n')
+        if restart.lower() != 'y':
             break
 
 
