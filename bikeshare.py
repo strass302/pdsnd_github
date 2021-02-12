@@ -52,10 +52,8 @@ def get_filters():
             break
         except:
             print('\n\nINVALID INPUT, please try again.')
-
     print('-'*40)
     return city, month, day
-
 
 def load_data(city, month, day):
     """
@@ -69,7 +67,6 @@ def load_data(city, month, day):
         df - Pandas DataFrame containing city data filtered by month and day
     """
     df = pd.read_csv(CITY_DATA[city])
-
     # convert timestamps to datetime
     df['Start Time'] = pd.to_datetime(df['Start Time'])
     df['End Time'] = pd.to_datetime(df['End Time'])
@@ -81,21 +78,17 @@ def load_data(city, month, day):
     df['day_of_week'] = df['Start Time'].dt.weekday_name
     # create trips column
     df['trip'] = df['Start Station'] + ' to ' + df['End Station']
-
     # filter by month if applicable
     month_filter = False
     if month != 'All':
         df = df[df['month'] == int(month)]
         month_filter = True
-
     # filter by day of week if applicable
     day_filter = False
     if day != 'All':
         df = df[df['day_of_week'] == DAY_OF_WEEK[day]]
         day_filter = True
-
     return df , month_filter, day_filter
-
 
 def time_stats(df, month_filter, day_filter):
     """Displays statistics on the most frequent times of travel."""
@@ -142,14 +135,12 @@ def station_stats(df):
     # display most frequent combination of start station and end station trip
     popular_trip = df['trip'].mode()[0]
     print('The most frequent start/stop station combination was from {}'.format(popular_trip))
-
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
 
 def trip_duration_stats(df):
     """Displays statistics on the total and average trip duration."""
-
     print('\nCalculating Trip Duration...\n')
     start_time = time.time()
 
@@ -157,14 +148,12 @@ def trip_duration_stats(df):
     travel_time = df['Travel Time'].sum().total_seconds() / (60*60*24)
     mean_travel_time = df['Travel Time'].mean().total_seconds() / (60)
     print('The total travel time was {} days, and the average travel time was {} minutes.'.format(travel_time, mean_travel_time))
-
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
 
 def user_stats(df):
     """Displays statistics on bikeshare users."""
-
     print('\nCalculating User Stats...\n')
     start_time = time.time()
 
@@ -205,8 +194,8 @@ def main():
         trip_duration_stats(df)
         user_stats(df)
         view_data(df)
-        restart = input('\nWould you like to restart? Enter yes or no.\n')
-        if restart.lower() != 'yes':
+        restart = input('\nWould you like to restart? Enter Y or N.\n')
+        if restart.lower() != 'y':
             break
 
 
